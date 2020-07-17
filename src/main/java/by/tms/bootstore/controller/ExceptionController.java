@@ -1,4 +1,4 @@
-package controller;
+package by.tms.bootstore.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
