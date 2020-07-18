@@ -1,6 +1,6 @@
-package entity.Order;
+package by.tms.bootstore.entity.Order;
 
-import entity.User.User;
+import by.tms.bootstore.entity.User.User;
 
 import java.util.List;
 

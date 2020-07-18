@@ -1,4 +1,4 @@
-package entity.Order;
+package by.tms.bootstore.entity.Order;
 
 
 public class OrderUser {
@@ -8,6 +8,7 @@ public class OrderUser {
     private StatusOrder status;
     private String address;
     private String telephone;
-    private StatusDelivery statusDelivery;
+    private DeliveryMethod deliveryMethod;
+    private PaymentMethod paymentMethod;
     private Store store;
 }

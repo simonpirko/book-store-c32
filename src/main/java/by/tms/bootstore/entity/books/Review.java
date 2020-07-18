@@ -1,6 +1,6 @@
-package entity.books;
+package by.tms.bootstore.entity.books;
 
-import entity.User.User;
+import by.tms.bootstore.entity.User.User;
 
 import java.util.Date;
 

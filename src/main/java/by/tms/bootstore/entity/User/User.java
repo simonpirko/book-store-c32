@@ -1,4 +1,4 @@
-package entity.User;
+package by.tms.bootstore.entity.User;
 
 import java.util.Calendar;
 import java.util.List;

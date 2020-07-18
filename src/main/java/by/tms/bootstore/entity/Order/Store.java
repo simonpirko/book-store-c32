@@ -1,6 +1,6 @@
-package entity.Order;
+package by.tms.bootstore.entity.Order;
 
-import entity.User.Moderator;
+import by.tms.bootstore.entity.User.Moderator;
 
 public class Store {
 
