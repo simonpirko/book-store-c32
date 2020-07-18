@@ -1,4 +1,4 @@
-package by.tms.bootstore.entity.User;
+package by.tms.bootstore.entity.user;
 
 import by.tms.bootstore.entity.books.Book;
 

@@ -1,4 +1,4 @@
-package by.tms.bootstore.entity.Order;
+package by.tms.bootstore.entity.order;
 
 import by.tms.bootstore.entity.books.Book;
 
