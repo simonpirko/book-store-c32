@@ -5,7 +5,7 @@ public class OrderUser {
 
     private long id;
     private OrderBook orderBook;
-    private StatusOrder status;
+    private OrderStatus status;
     private String address;
     private String telephone;
     private DeliveryMethod deliveryMethod;

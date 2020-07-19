@@ -1,6 +1,6 @@
 package by.tms.bootstore.entity.order;
 
-public enum StatusOrder {
+public enum OrderStatus {
     PROCESSED, // обрабатывается
     WAITING_FOR_PAYMENT, // ожидание оплаты
     ORDERED, // заказано
