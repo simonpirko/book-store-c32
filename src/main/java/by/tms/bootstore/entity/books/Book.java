@@ -1,4 +1,4 @@
-package entity.books;
+package by.tms.bootstore.entity.books;
 
 import java.util.List;
 
