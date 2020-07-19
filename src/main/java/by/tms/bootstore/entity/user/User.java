@@ -1,7 +1,10 @@
 package by.tms.bootstore.entity.user;
 
+import lombok.Data;
+
 import java.util.Calendar;
 import java.util.List;
+
 
 public class User {
 

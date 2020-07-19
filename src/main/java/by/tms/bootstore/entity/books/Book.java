@@ -11,8 +11,8 @@ public class Book {
     private String publisher;
     private String publicationDate;
     private String pages;
-    private List <Category>category;
-    private List <Review> review;
+    private List<Genres> genres;
+    private List<Review> review;
     private double cost;
     private StatusBook statusBook;
     private String description;
