@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 // страница просмотра книги по id
 
 @Controller
-@RequestMapping("/book")
+@RequestMapping("/getBookInfo")
 public class BookController {
 
     @GetMapping

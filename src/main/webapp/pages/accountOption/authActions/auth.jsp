@@ -10,4 +10,6 @@
 </html>
 
 
-<%--Page with info about book--%>
+<%--страница авторизации--%>
+
+<%--Different for admins, moders, users--%>
