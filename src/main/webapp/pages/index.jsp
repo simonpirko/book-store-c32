@@ -6,6 +6,18 @@
 </head>
 <body>
 
+
+<a href="/auth">Auth</a>
+<a href="/reg">Reg</a>
+
+<a href="/createOrder">Create order</a>
+
+<a href="/adminMenu">Your profile</a>
+<a href="/moderMenu">Your profile</a>
+
+<a href="/userMenu">Your profile</a>
+
+<a href="/logout">Logout</a>
 </body>
 </html>
 

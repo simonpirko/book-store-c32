@@ -2,14 +2,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Basket</title>
 </head>
 <body>
 
-<a href="/">Main</a>
+<a href="/createOrder">Create order</a>
+<%--Удалить книгу--%>
+
 
 </body>
 </html>
-
-
-<%--Editing moderators for admin--%>

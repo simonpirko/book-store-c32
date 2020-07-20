@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<a href="/">Main</a>
+
 </body>
 </html>
 
