@@ -2,11 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Main</title>
+    <title>Title</title>
 </head>
 <body>
-<a href="/main">Main</a>
+
+<a href="/">Main</a>
+
 </body>
 </html>
 
-<%--главная страница--%>
+
+<%--Editing moderators for admin--%>

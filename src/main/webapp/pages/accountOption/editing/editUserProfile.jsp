@@ -5,14 +5,10 @@
 </head>
 <body>
 
-<a href="/addToBasket">Add to basket</a>
-<%--Добавить в wishList--%>
-<%--добавить Review для User--%>
-
 <a href="/">Main</a>
 
 </body>
 </html>
 
 
-<%--Page with info about book--%>
+<%--Editing user for admins--%>

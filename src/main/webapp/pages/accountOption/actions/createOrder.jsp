@@ -10,4 +10,5 @@
 </html>
 
 
-<%--страница авторизации--%>
+<%--Create order for User/
+ Confirm for Moderator--%>

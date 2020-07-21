@@ -7,6 +7,6 @@ public class BookInOrder {
 
     private long id;
     private Book book;
-    private double countOfBook;
+    private int countOfBook;
 
 }
