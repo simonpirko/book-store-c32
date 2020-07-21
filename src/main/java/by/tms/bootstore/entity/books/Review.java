@@ -5,9 +5,9 @@ import by.tms.bootstore.entity.user.User;
 import java.util.Date;
 
 public class Review {
-
     private long id;
     private String body;
+    private Estimation estimation;
     private User user;
     private Date date;
 }
