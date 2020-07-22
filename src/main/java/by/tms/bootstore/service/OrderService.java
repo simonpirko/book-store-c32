@@ -6,13 +6,19 @@ import by.tms.bootstore.entity.order.OrderUser;
 import by.tms.bootstore.entity.order.Store;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Service
+@Transactional
 public class OrderService {
+
+    public int sum(int a, int b){
+        return 0;
+    }
 
     public void createBookInOrder() {
     }
