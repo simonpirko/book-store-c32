@@ -11,7 +11,7 @@ public class AddBookController {
 
     @GetMapping
     public String form() {
-        return "accountOption/actions/createBook";
+        return "accountOption/book/createBook";
     }
 
 }

@@ -5,7 +5,6 @@ public enum Genres {
     Adventure,
     Romance,
     Contemporary,
-    Dystopian,
     Mystery,
     Horror,
     Thriller,

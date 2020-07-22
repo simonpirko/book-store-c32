@@ -12,7 +12,7 @@ public class EditBookController {
 
     @GetMapping
     public String form(){
-        return "accountOption/editing/editBook";
+        return "accountOption/book/editBook";
     }
 
 }

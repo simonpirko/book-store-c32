@@ -11,16 +11,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 // страница просмотра книги по id
 
 @Controller
-@RequestMapping("/getBookInfo")
+@RequestMapping("/book")
 public class BookController {
 
     @GetMapping
     public String form() {
-        return "book";
+        return "";
     }
 
     @PostMapping
-    public String postForm(@RequestParam Long id) {
+    public String postForm() {
         return "";
     }
+
+    @GetMapping("/createBook")
+    public String createBookG() {
+        return "";
+    }
+
+    @PostMapping ("/createBook")
+    public String  createBookP () {
+        return "";
+    }
+
+    @GetMapping("/editBook")
+    public String editBookG() {
+        return "";
+    }
+
+    @PostMapping ("/editBook")
+    public String editBookP() {
+        return "";
+    }
+
+
+
 }
