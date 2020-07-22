@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BookController {
 
     @GetMapping
-    public String form() {
+    public String bookPagesG() {
         return "";
     }
 
     @PostMapping
-    public String postForm() {
+    public String bookPagesP() {
         return "";
     }
 

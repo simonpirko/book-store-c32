@@ -1,17 +1,16 @@
-package by.tms.bootstore.controller;
+package by.tms.bootstore.lesson;
 
 
 import by.tms.bootstore.entity.order.DeliveryMethod;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Slf4j
-@Controller
-@RequestMapping(path = "/addBook")
+//
+//@Slf4j
+//@Controller
+//@RequestMapping(path = "/addBook")
 public class AddBookController {
 
 
@@ -22,10 +21,10 @@ public class AddBookController {
 //        }
 //    }
 
-    @GetMapping
-    public String form() {
-        log.warn("Use this method!");
-        return "accountOption/actions/createBook";
-    }
+//    @GetMapping
+//    public String form() {
+//        log.warn("Use this method!");
+//        return "accountOption/actions/createBook";
+//    }
 
 }

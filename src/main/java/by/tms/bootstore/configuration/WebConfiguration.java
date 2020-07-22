@@ -1,10 +1,10 @@
 package by.tms.bootstore.configuration;
 
-import org.apache.commons.dbcp2.BasicDataSource;
-import org.postgresql.Driver;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -13,8 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 
 @ComponentScan(basePackages = "by.tms.bootstore")
 @Configuration
@@ -38,8 +37,9 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2).build();
-//                .addScript("classpath:jdbc/schema.sql")
+                .setType(EmbeddedDatabaseType.H2)
+                .setName("TESTDB")
+                .addScript("classpath:schema.sql").build();
 //                .addScript("classpath:jdbc/test-data.sql").build();
     }
 
