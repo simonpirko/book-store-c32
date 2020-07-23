@@ -119,6 +119,5 @@ hs_err_pid*
 .idea/modules.xml
 .idea/sqldialects.xml
 .idea/vcs.xml
-schema.sql
-src/main/resources/
 src/main/webapp/pages/actions/
+src/main/java/test.http

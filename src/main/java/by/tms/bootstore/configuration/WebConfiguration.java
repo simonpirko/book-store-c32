@@ -1,6 +1,7 @@
 package by.tms.bootstore.configuration;
 
 
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -37,11 +38,20 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .setName("TESTDB")
-                .addScript("classpath:schema.sql").build();
-//                .addScript("classpath:jdbc/test-data.sql").build();
+                .setType(EmbeddedDatabaseType.H2).build();
+//               .addScript("classpath:schema.sql")
+//               .addScript("classpath:insert.sql")
     }
+
+//    @Bean
+//    public DataSource dataSource() {
+//        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+//        dataSourceBuilder.driverClassName("org.h2.Driver");
+//        dataSourceBuilder.url("jdbc:h2:mem:testdb");
+//        dataSourceBuilder.username("SA");
+//        dataSourceBuilder.password("");
+//        return dataSourceBuilder.build();
+//    }
 
 //    @Bean
 //    public DataSource dataSource(){
