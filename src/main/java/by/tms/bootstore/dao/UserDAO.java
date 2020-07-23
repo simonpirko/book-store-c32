@@ -2,6 +2,7 @@ package by.tms.bootstore.dao;
 
 import by.tms.bootstore.entity.user.User;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -9,23 +10,36 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Data
 @Repository
 public class UserDAO {
 
+    {
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     private JdbcTemplate template;
 
-//    public void save() {
-//        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-//                .addValue("LOGIN", "test")
-//                .addValue("FIRSTNAME", "test")
-//                .addValue("LASTNAME", "test")
-//                .addValue("PASSWORD", "test")
-//                .addValue("EMAIL", "test")
-//                .addValue("TELEPHONE", "test")
-//                .addValue("ROLE", "test");
-//        template.update("insert into 'USER_DB' values ( default, :LOGIN, :FIRSTNAME, :LASTNAME, :PASSWORD, :EMAIL, :TELEPHONE, :ROLE )", sqlParameterSource);
-////    }
+    public UserDAO(JdbcTemplate template) {
+        this.template = template;
+    }
+
+
+    public void save() {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("FIRSTNAME", "test")
+                .addValue("LASTNAME", "test")
+                .addValue("PASSWORD", "test")
+                .addValue("EMAIL", "test")
+                .addValue("TELEPHONE", "test")
+                .addValue("ROLE", "test");
+        template.update("insert into USER_DB (FIRSTNAME, LASTNAME, PASSWORD, EMAIL, TELEPHONE, ROLE) values ('er', 'er', 'er', 'er', 'er','er')");
+    }
 
 //    public void save(User user) {
 //        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
@@ -44,5 +58,5 @@ public class UserDAO {
 //        return template.query("select * from 'users'", new UserRowMapper());
 //    }
 
-    }
+//    }
 }
