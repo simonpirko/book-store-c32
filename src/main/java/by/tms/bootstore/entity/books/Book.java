@@ -7,7 +7,7 @@ public class Book {
     private long id;
     private String name;
     private String author;
-    private String format;
+    private Format format;
     private String publisher;
     private String publicationDate;
     private String pages;
