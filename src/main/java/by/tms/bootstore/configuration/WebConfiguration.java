@@ -38,9 +38,9 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2).build();
-//               .addScript("classpath:schema.sql")
-//               .addScript("classpath:insert.sql")
+                .setType(EmbeddedDatabaseType.H2)
+               .addScript("classpath:schema.sql")
+               .addScript("classpath:insert.sql").build();
     }
 
 //    @Bean
