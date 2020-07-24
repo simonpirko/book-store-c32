@@ -1,11 +1,11 @@
 package by.tms.bootstore.configuration;
 
 
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.h2.server.web.WebServlet;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -23,7 +23,7 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
 
 
     @Bean
-    public InternalResourceViewResolver viewResolver(){
+    public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
         internalResourceViewResolver.setPrefix("/pages/");
         internalResourceViewResolver.setSuffix(".jsp");
@@ -31,16 +31,17 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
+    public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
 
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2).build();
-//               .addScript("classpath:schema.sql")
-//               .addScript("classpath:insert.sql")
+                .setType(EmbeddedDatabaseType.H2)
+                .setName("test")
+                .addScript("classpath:schema.sql")
+                .addScript("classpath:insert.sql").build();
     }
 
 //    @Bean
