@@ -38,7 +38,7 @@ public class BookDAO {
                 .addValue("statusBook", book.getStatusBook().toString())
                 .addValue("description", book.getDescription());
         namedParameterJdbcTemplate.update("INSERT INTO bookDB (name, author, format, publisher, publicationDate, pages, cost, statusBook, description) " +
-                "VALUES (:name1, :author, :format, :publisher, :publicationDate, :pages, :cost, :statusBook, :description)", sqlParameterSource);
+                "VALUES (:name, :author, :format, :publisher, :publicationDate, :pages, :cost, :statusBook, :description)", sqlParameterSource);
     }
 
 //    public int[] batchUpdateUsingJdbcTemplate(Book book) {

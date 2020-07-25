@@ -16,7 +16,7 @@ public class BookService {
 
     private final BookDAO bookDAO;
 
-    @Autowired
+
     public BookService(BookDAO bookDAO) {
         this.bookDAO = bookDAO;
     }
@@ -24,7 +24,6 @@ public class BookService {
 
     public void createBook(Book book) {
         bookDAO.saveBook(book);
-        bookDAO.saveGenres(book);
     }
 
     public void updateBook(Book book) {
