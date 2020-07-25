@@ -1,18 +1,30 @@
 package by.tms.bootstore.service;
 
+import by.tms.bootstore.dao.BookDAO;
 import by.tms.bootstore.entity.books.Book;
 import by.tms.bootstore.entity.books.Genres;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Service
 public class BookService {
 
+
+    private final BookDAO bookDAO;
+
+    @Autowired
+    public BookService(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
+    }
+
+
     public void createBook(Book book) {
+        bookDAO.saveBook(book);
+        bookDAO.saveGenres(book);
     }
 
     public void updateBook(Book book) {

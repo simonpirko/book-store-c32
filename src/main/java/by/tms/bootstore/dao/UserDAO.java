@@ -13,16 +13,6 @@ import java.util.List;
 @Repository
 public class UserDAO {
 
-    {
-        try {
-            Class.forName("org.h2.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
     private JdbcTemplate template;
 
     public UserDAO(JdbcTemplate template) {
