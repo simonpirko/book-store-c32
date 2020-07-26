@@ -4,6 +4,7 @@ import by.tms.bootstore.dao.BookDAO;
 import by.tms.bootstore.entity.books.Book;
 import by.tms.bootstore.entity.books.Genres;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +16,19 @@ public class BookService {
 
 
     private final BookDAO bookDAO;
+    private final ModelMapper modelMapper;
 
 
-    public BookService(BookDAO bookDAO) {
+    public BookService(BookDAO bookDAO, ModelMapper modelMapper) {
         this.bookDAO = bookDAO;
+        this.modelMapper = modelMapper;
     }
-
 
     public void createBook(Book book) {
         bookDAO.saveBook(book);
+        bookDAO.saveGenres(book);
+        bookDAO.saveReview(book);
+        bookDAO.saveBookReviewDB(book);
     }
 
     public void updateBook(Book book) {
