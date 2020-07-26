@@ -2,6 +2,7 @@ package by.tms.bootstore.configuration;
 
 
 import org.h2.server.web.WebServlet;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -49,6 +50,11 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
                 .setName("test")
                 .addScript("classpath:schema.sql").build();
 //                .addScript("classpath:insert.sql")
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
 //    @Bean

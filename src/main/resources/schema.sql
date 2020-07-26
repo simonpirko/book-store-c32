@@ -25,24 +25,24 @@ create table genresDB
     name varchar
 );
 
-create table review_db
+create table reviewDB
 (
     id long auto_increment,
     body varchar,
     estimation varchar,
-    id_user long,
-    publication_date date
+    idUser long,
+    publicationDate varchar
 );
 
-create unique index review_db_id_uindex
-    on review_db (id);
+create unique index reviewDB_id_uindex
+    on reviewDB (id);
 
-alter table review_db
-    add constraint review_db_pk
+alter table reviewDB
+    add constraint reviewDB_pk
         primary key (id);
 
-create table book_review_db
+create table bookReviewDB
 (
-    id_book long,
-    id_review long
+    idBook long,
+    idReview long
 );
