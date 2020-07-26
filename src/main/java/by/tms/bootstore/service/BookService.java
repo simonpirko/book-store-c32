@@ -7,6 +7,7 @@ import lombok.Data;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class BookService {
         this.modelMapper = modelMapper;
     }
 
+    @Transactional
     public void createBook(Book book) {
         bookDAO.saveBook(book);
         bookDAO.saveGenres(book);
