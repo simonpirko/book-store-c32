@@ -43,8 +43,9 @@ public class BookController {
 
     @PostMapping ("/createBook")
     public String  createBookP () {
+        Date date= new Date();
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.getTime();
+        calendar.setTime(date);
 
         List<Genres> genres = new ArrayList<>();
         genres.add(Genres.Adventure);
