@@ -3,8 +3,10 @@ package by.tms.bootstore.service;
 import by.tms.bootstore.dao.BookDAO;
 import by.tms.bootstore.entity.books.Book;
 import by.tms.bootstore.entity.books.Genres;
+import by.tms.bootstore.entity.books.Review;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,10 +30,36 @@ public class BookService {
     @Transactional
     public void createBook(Book book) {
         bookDAO.saveBook(book);
-        bookDAO.saveGenres(book);
+        bookDAO.saveGenres(convertToGenresDTO(book));
         bookDAO.saveReview(book);
-        bookDAO.saveBookReviewDB(book);
+        bookDAO.saveBookReviewDB(convertToBookReviewDTO(book));
     }
+
+    private List<GenresForBookDTO> convertToGenresDTO(Book book) {
+        List<GenresForBookDTO> genresForBookDTOList = new ArrayList<>();
+        for (Genres genres: book.getGenres()
+             ) {
+            GenresForBookDTO genresForBookDTO = new GenresForBookDTO();
+            genresForBookDTO.setIdBook(book.getId());
+            genresForBookDTO.setGenres(genres);
+            genresForBookDTOList.add(genresForBookDTO);
+        }
+       return genresForBookDTOList;
+    }
+
+    private List<BookReviewDTO> convertToBookReviewDTO(Book book) {
+        List<BookReviewDTO> bookReviewDTOArrayList = new ArrayList<>();
+        for (Review review: book.getReview()
+        ) {
+           BookReviewDTO bookReviewDTO = new BookReviewDTO();
+           bookReviewDTO.setIdBook(book.getId());
+           bookReviewDTO.setIdReview(review.getId());
+           bookReviewDTOArrayList.add(bookReviewDTO);
+        }
+        return bookReviewDTOArrayList;
+    }
+
+
 
     public void updateBook(Book book) {
     }

@@ -1,8 +1,9 @@
 package by.tms.bootstore.dao;
 
 import by.tms.bootstore.entity.books.Book;
-import by.tms.bootstore.entity.books.Genres;
 import by.tms.bootstore.entity.books.Review;
+import by.tms.bootstore.service.BookReviewDTO;
+import by.tms.bootstore.service.GenresForBookDTO;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -43,24 +44,30 @@ public class BookDAO {
                 "VALUES (:name, :author, :format, :publisher, :publicationDate, :pages, :cost, :statusBook, :description)", sqlParameterSource);
     }
 
-    private void addGenres(long idBook, Genres genres) {
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue("idBook", idBook)
-                .addValue("name", genres.toString());
-                     namedParameterJdbcTemplate.update("INSERT INTO genresDB (idBook, name) VALUES (:idBook, :name)", sqlParameterSource);
+
+    public int[] saveGenres(List<GenresForBookDTO> genresForBookDTOList) {
+        return jdbcTemplate.batchUpdate("INSERT INTO genresDB (idBook, name) VALUES (?, ?)",
+                new BatchPreparedStatementSetter() {
+
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setLong(1, genresForBookDTOList.get(i).getIdBook());
+                        ps.setString(2, genresForBookDTOList.get(i).getGenres().toString());
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return genresForBookDTOList.size();
+                    }
+                });
     }
 
-    public void saveGenres (Book book){
-        for (Genres genres: book.getGenres()) {
-            addGenres(book.getId(), genres);
-        }
-    }
 
-
-    public int[] saveReview (Book book) {
+    public int[] saveReview(Book book) {
         List<Review> review = book.getReview();
         return jdbcTemplate.batchUpdate("INSERT INTO reviewDB (body, estimation, idUser, publicationDate) VALUES (?, ?, ?, ?)",
                 new BatchPreparedStatementSetter() {
+
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
                         ps.setString(1, review.get(i).getBody());
@@ -68,6 +75,7 @@ public class BookDAO {
                         ps.setLong(3, review.get(i).getIdUser());
                         ps.setString(4, review.get(i).getDate().toString());
                     }
+
                     @Override
                     public int getBatchSize() {
                         return review.size();
@@ -75,27 +83,22 @@ public class BookDAO {
                 });
     }
 
-    private void addBookReviewDB(long idBook, long idReview) {
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue("idBook", idBook)
-                .addValue("idReview", idReview);
-        namedParameterJdbcTemplate.update("INSERT INTO bookReviewDB (idBook, idReview) VALUES (:idBook, :idReview)", sqlParameterSource);
+    public int[] saveBookReviewDB(List<BookReviewDTO> bookReviewDTOList) {
+        return jdbcTemplate.batchUpdate("INSERT INTO bookReviewDB (idBook, idReview) VALUES (?, ?)",
+                new BatchPreparedStatementSetter() {
+
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setLong(1, bookReviewDTOList.get(i).getIdBook());
+                        ps.setLong(2, bookReviewDTOList.get(i).getIdReview());
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return bookReviewDTOList.size();
+                    }
+                });
     }
-
-    public void saveBookReviewDB(Book book){
-        List<Review> review = book.getReview();
-        for (Review rev : review) {
-            addBookReviewDB(book.getId(), rev.getId());
-        }
-    }
-
-
-
-
-
-
-
-
 }
 
 
