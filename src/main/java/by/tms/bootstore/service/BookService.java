@@ -4,15 +4,16 @@ import by.tms.bootstore.dao.BookDAO;
 import by.tms.bootstore.entity.books.Book;
 import by.tms.bootstore.entity.books.Genres;
 import by.tms.bootstore.entity.books.Review;
-import lombok.Data;
+import by.tms.bootstore.service.DTO.BookReviewDTO;
+import by.tms.bootstore.service.DTO.GenresForBookDTO;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BookService {
@@ -29,8 +30,9 @@ public class BookService {
 
     @Transactional
     public void createBook(Book book) {
-        bookDAO.saveBook(book);
-        bookDAO.saveGenres(convertToGenresDTO(book));
+        KeyHolder keyHolder = bookDAO.saveBook(book);
+        long idBook = Objects.requireNonNull(keyHolder.getKey()).longValue();
+        book.setId(idBook);
         bookDAO.saveReview(book);
         bookDAO.saveBookReviewDB(convertToBookReviewDTO(book));
     }
@@ -65,6 +67,8 @@ public class BookService {
     }
 
     public Book getBookById(Long id) {
+        bookDAO.getBook(id);
+        bookDAO.getGenresDTO(id);
         return new Book();
     }
 

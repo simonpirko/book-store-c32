@@ -1,8 +1,14 @@
-package by.tms.bootstore.service;
+package by.tms.bootstore.service.DTO;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 public class BookReviewDTO {
 
+    @Id
     private Long idBook;
+
     private Long idReview;
 
     public BookReviewDTO(Long idBook, Long idReview) {

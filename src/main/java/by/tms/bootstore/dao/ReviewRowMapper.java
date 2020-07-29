@@ -25,7 +25,6 @@ public class ReviewRowMapper implements RowMapper<Review> {
         review.setEstimation(Estimation.valueOf(rs.getString("ESTIMATION")));
         review.setIdUser(rs.getLong("IDUSER"));
         review.setDate((GregorianCalendar) cal);
-
         return review;
     }
 }

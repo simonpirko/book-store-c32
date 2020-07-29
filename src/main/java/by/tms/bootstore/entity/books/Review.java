@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.util.GregorianCalendar;
 
 
@@ -11,6 +12,8 @@ import java.util.GregorianCalendar;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Review {
+
+
     private long id;
     private String body;
     private Estimation estimation;
