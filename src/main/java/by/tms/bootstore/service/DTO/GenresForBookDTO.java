@@ -1,4 +1,4 @@
-package by.tms.bootstore.service;
+package by.tms.bootstore.service.DTO;
 
 import by.tms.bootstore.entity.books.Genres;
 

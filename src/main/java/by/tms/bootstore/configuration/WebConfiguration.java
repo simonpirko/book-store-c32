@@ -1,9 +1,6 @@
 package by.tms.bootstore.configuration;
 
-
-import org.h2.server.web.WebServlet;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -48,8 +45,8 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .setName("test")
-                .addScript("classpath:schema.sql").build();
-//                .addScript("classpath:insert.sql")
+                .addScript("classpath:schema.sql")
+                .addScript("classpath:insert.sql").build();
     }
 
     @Bean
