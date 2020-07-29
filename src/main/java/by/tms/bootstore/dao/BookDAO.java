@@ -58,52 +58,21 @@ public class BookDAO {
 
 
 
+    public int[] saveGenres (List<GenresForBookDTO> genresForBookDTOList) {
+        return jdbcTemplate.batchUpdate("INSERT INTO genresDB (idBook, name) VALUES (?, ?)",
+                new BatchPreparedStatementSetter() {
 
-
-
-
-
-
-//    public BookIdDTO saveBook(Book book) {
-//        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-//                .addValue("name", book.getName())
-//                .addValue("author", book.getAuthor())
-//                .addValue("format", book.getFormat().toString())
-//                .addValue("publisher", book.getPublisher())
-//                .addValue("publicationDate", book.getPublicationDate())
-//                .addValue("pages", book.getPages())
-//                .addValue("cost", book.getCost())
-//                .addValue("statusBook", book.getStatusBook().toString())
-//                .addValue("description", book.getDescription());
-//       namedParameterJdbcTemplate.update("INSERT INTO bookDB (name, author, format, publisher, publicationDate, pages, cost, statusBook, description) " +
-//                "VALUES (:name, :author, :format, :publisher, :publicationDate, :pages, :cost, :statusBook, :description)", sqlParameterSource);
-//       namedParameterJdbcTemplate.getJdbcTemplate().
-//
-//    }
-
-//    public List<Book> saveBook(Book book) {
-//        return jdbcTemplate.query("INSERT INTO bookDB (name, author, format, publisher, publicationDate, pages, cost, statusBook, description) " +
-//                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) returning *",new Object[] { book.getName(), book.getAuthor(), book.getFormat().toString(), book.getPublisher(), book.getPublicationDate(), book.getPages(), book.getCost(), book.getStatusBook().toString(), book.getDescription()}, new BookRowMapper());
-//    }
-
-
-
-//    public int[] saveGenres(List<GenresForBookDTO> genresForBookDTOList) {
-//        return jdbcTemplate.batchUpdate("INSERT INTO genresDB (idBook, name) VALUES (?, ?)",
-//                new BatchPreparedStatementSetter() {
-//
-//                    @Override
-//                    public void setValues(PreparedStatement ps, int i) throws SQLException {
-//                        ps.setLong(1, genresForBookDTOList.get(i).getIdBook());
-//                        ps.setString(2, genresForBookDTOList.get(i).getGenres().toString());
-//                    }
-//
-//                    @Override
-//                    public int getBatchSize() {
-//                        return genresForBookDTOList.size();
-//                    }
-//                });
-//    }
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setLong(1, genresForBookDTOList.get(i).getIdBook());
+                        ps.setLong(2, genresForBookDTOList.get(i).getIdGenres());
+                    }
+                    @Override
+                    public int getBatchSize() {
+                        return genresForBookDTOList.size();
+                    }
+                });
+    }
 
 
     public int[] saveReview(Book book) {

@@ -11,8 +11,8 @@ public class GenresForBookRowMapper implements RowMapper<GenresForBookDTO> {
     @Override
     public GenresForBookDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
         GenresForBookDTO genres = new GenresForBookDTO();
-//        genres.setIdBook(rs.getLong("IDBOOK"));
-//        genres.setGenres(Genres.valueOf(rs.getString("NAME")));
+        genres.setIdBook(rs.getLong("IDBOOK"));
+        genres.setIdBook(rs.getLong("IDGENRES"));
         return genres;
     }
 }

@@ -43,7 +43,7 @@ public class BookService {
              ) {
             GenresForBookDTO genresForBookDTO = new GenresForBookDTO();
             genresForBookDTO.setIdBook(book.getId());
-            genresForBookDTO.setGenres(genres);
+            genresForBookDTO.setIdGenres(genres.getId());
             genresForBookDTOList.add(genresForBookDTO);
         }
        return genresForBookDTOList;
