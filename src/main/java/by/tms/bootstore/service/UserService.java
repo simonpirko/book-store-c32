@@ -1,19 +1,34 @@
 package by.tms.bootstore.service;
 
 
+import by.tms.bootstore.dao.BookDAO;
+import by.tms.bootstore.dao.UserDAO;
 import by.tms.bootstore.entity.user.Moderator;
 import by.tms.bootstore.entity.user.User;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 @Service
 public class UserService {
 
-    public void createUser(){
+    private final UserDAO userDAO;
+    private final ModelMapper modelMapper;
+
+
+    public UserService(UserDAO userDAO, ModelMapper modelMapper) {
+        this.userDAO = userDAO;
+        this.modelMapper = modelMapper;
+    }
+
+    @Transactional
+    public void createUser(User user){
+        userDAO.createUser(user);
     }
 
 

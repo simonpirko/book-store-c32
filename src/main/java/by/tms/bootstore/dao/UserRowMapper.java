@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 public class UserRowMapper implements RowMapper<User> {
 
+    //change
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         User user = new User();
 

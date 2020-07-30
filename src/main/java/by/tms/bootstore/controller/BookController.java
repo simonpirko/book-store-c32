@@ -54,7 +54,6 @@ public class BookController {
         review.add(new Review(1, "testR1", Estimation.Neutral, 1, calendar));
         review.add(new Review(2, "testR2", Estimation.Neutral, 2, calendar));
         Book book = new Book (1,"test", "test", Format.Hardback, "test", 2000, 100, genres, review, 234, StatusBook.IN_STOCK, "test");
-
         bookService.createBook(book);
         return "";
     }

@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Repository
@@ -19,6 +21,17 @@ public class UserDAO {
         this.template = template;
     }
 
+    public void createUser(User user) {
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
+                .addValue("LOGIN", user.getLogin())
+                .addValue("FIRSTNAME", user.getFirstName())
+                .addValue("LASTNAME", user.getLastName())
+                .addValue("PASSWORD", user.getPassword())
+                .addValue("EMAIL", user.getEmail())
+                .addValue("TELEPHONE", user.getTelephone());
+        template.update("insert into users (login,firstName, lastName, password, email, telephone)" +
+                " values (:login,:firstName, :lastName, :password, :email, :telephone)", sqlParameterSource);
+    }
 
     public void save() {
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
