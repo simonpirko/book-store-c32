@@ -1,4 +1,4 @@
-package by.tms.bootstore.dao;
+package by.tms.bootstore.dao.rowMapper;
 
 import by.tms.bootstore.service.DTO.BookReviewDTO;
 import org.springframework.jdbc.core.RowMapper;

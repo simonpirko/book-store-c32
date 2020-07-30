@@ -1,4 +1,4 @@
-package by.tms.bootstore.dao;
+package by.tms.bootstore.dao.rowMapper;
 
 import by.tms.bootstore.entity.books.Genres;
 import by.tms.bootstore.service.DTO.GenresForBookDTO;

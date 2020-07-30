@@ -33,6 +33,7 @@ public class BookService {
         KeyHolder keyHolder = bookDAO.saveBook(book);
         long idBook = Objects.requireNonNull(keyHolder.getKey()).longValue();
         book.setId(idBook);
+        bookDAO.saveGenres(convertToGenresDTO(book));
         bookDAO.saveReview(book);
         bookDAO.saveBookReviewDB(convertToBookReviewDTO(book));
     }
@@ -132,6 +133,18 @@ public class BookService {
     // сортировка по рекомендую/нерекомендую
     public List<Book> sortByReviews(String typeOfReview) {
         return new ArrayList<Book>();
+    }
+
+    public List<Integer> listYear() {
+        List<Integer> listYear = new ArrayList<>();
+        for (int i = 1960; i < 2021; i++) {
+            listYear.add(i);
+        }
+        return listYear;
+    }
+
+    public List<Genres> allGenres(){
+        return bookDAO.getAllGenres();
     }
 
 }

@@ -1,6 +1,10 @@
 package by.tms.bootstore.dao;
 
+import by.tms.bootstore.dao.rowMapper.BookRowMapper;
+import by.tms.bootstore.dao.rowMapper.GenresForBookRowMapper;
+import by.tms.bootstore.dao.rowMapper.GenresRowMapper;
 import by.tms.bootstore.entity.books.Book;
+import by.tms.bootstore.entity.books.Genres;
 import by.tms.bootstore.entity.books.Review;
 import by.tms.bootstore.service.DTO.BookReviewDTO;
 import by.tms.bootstore.service.DTO.GenresForBookDTO;
@@ -15,7 +19,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -124,6 +127,13 @@ public class BookDAO {
                 "SELECT * FROM genresDB WHERE IDBOOK = ?",
                 new Object[] { id }, new GenresForBookRowMapper());
         return genresForBookDTOList;
+    }
+
+    public List <Genres> getAllGenres (){
+        List <Genres> genresList =  jdbcTemplate.query(
+                "SELECT * FROM genresDB",
+                new GenresRowMapper());
+        return genresList;
     }
 
 
