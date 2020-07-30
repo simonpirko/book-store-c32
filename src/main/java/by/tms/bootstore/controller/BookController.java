@@ -48,13 +48,25 @@ public class BookController {
         calendar.setTime(date);
 
         List<Genres> genres = new ArrayList<>();
-        genres.add(Genres.Adventure);
-        genres.add(Genres.Romance);
+        genres.add(new Genres(1, "Fantasy"));
+        genres.add(new Genres(7, "Thriller"));
         List<Review> review = new ArrayList<>();
         review.add(new Review(1, "testR1", Estimation.Neutral, 1, calendar));
         review.add(new Review(2, "testR2", Estimation.Neutral, 2, calendar));
-        Book book = new Book (1,"test", "test", Format.Hardback, "test", 2000, 100, genres, review, 234, StatusBook.IN_STOCK, "test");
+        Book book = new Book ("test", "test", Format.Hardback, "test", 2000, 100, genres, review, 234, StatusBook.IN_STOCK, "test");
+
         bookService.createBook(book);
+        return "";
+    }
+
+    @GetMapping("/getBook")
+    public String getBookG() {
+        bookService.getBookById(1L);
+                return "";
+    }
+
+    @PostMapping ("/getBook")
+    public String getBookP() {
         return "";
     }
 

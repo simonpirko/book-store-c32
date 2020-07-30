@@ -1,27 +1,14 @@
 package by.tms.bootstore.entity.books;
 
-public enum Genres {
-    Fantasy,
-    Adventure,
-    Romance,
-    Contemporary,
-    Mystery,
-    Horror,
-    Thriller,
-    Paranormal,
-    Historical_fiction,
-    Science_Fiction,
-    Memoir,
-    Cooking,
-    Art,
-    Self_help,
-    Development,
-    Motivational,
-    Health,
-    History,
-    Travel,
-    Guide_How_to,
-    Families_and_Relationships,
-    Humor,
-    Children_s
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Genres {
+
+    private long id;
+    private String name;
 }

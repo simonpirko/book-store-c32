@@ -21,9 +21,16 @@ alter table bookDB
 
 create table genresDB
 (
-    idBook long,
+    id long auto_increment,
     name varchar
 );
+
+create unique index genresDB_id_uindex
+    on genresDB (id);
+
+alter table genresDB
+    add constraint genresDB_pk
+        primary key (id);
 
 create table reviewDB
 (
