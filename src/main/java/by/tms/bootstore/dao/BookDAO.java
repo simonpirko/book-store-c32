@@ -1,6 +1,10 @@
 package by.tms.bootstore.dao;
 
+import by.tms.bootstore.dao.rowMapper.BookRowMapper;
+import by.tms.bootstore.dao.rowMapper.GenresForBookRowMapper;
+import by.tms.bootstore.dao.rowMapper.GenresRowMapper;
 import by.tms.bootstore.entity.books.Book;
+import by.tms.bootstore.entity.books.Genres;
 import by.tms.bootstore.entity.books.Review;
 import by.tms.bootstore.service.DTO.BookReviewDTO;
 import by.tms.bootstore.service.DTO.GenresForBookDTO;
@@ -15,7 +19,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -58,52 +61,21 @@ public class BookDAO {
 
 
 
+    public int[] saveGenres (List<GenresForBookDTO> genresForBookDTOList) {
+        return jdbcTemplate.batchUpdate("INSERT INTO genresDB (idBook, name) VALUES (?, ?)",
+                new BatchPreparedStatementSetter() {
 
-
-
-
-
-
-//    public BookIdDTO saveBook(Book book) {
-//        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-//                .addValue("name", book.getName())
-//                .addValue("author", book.getAuthor())
-//                .addValue("format", book.getFormat().toString())
-//                .addValue("publisher", book.getPublisher())
-//                .addValue("publicationDate", book.getPublicationDate())
-//                .addValue("pages", book.getPages())
-//                .addValue("cost", book.getCost())
-//                .addValue("statusBook", book.getStatusBook().toString())
-//                .addValue("description", book.getDescription());
-//       namedParameterJdbcTemplate.update("INSERT INTO bookDB (name, author, format, publisher, publicationDate, pages, cost, statusBook, description) " +
-//                "VALUES (:name, :author, :format, :publisher, :publicationDate, :pages, :cost, :statusBook, :description)", sqlParameterSource);
-//       namedParameterJdbcTemplate.getJdbcTemplate().
-//
-//    }
-
-//    public List<Book> saveBook(Book book) {
-//        return jdbcTemplate.query("INSERT INTO bookDB (name, author, format, publisher, publicationDate, pages, cost, statusBook, description) " +
-//                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) returning *",new Object[] { book.getName(), book.getAuthor(), book.getFormat().toString(), book.getPublisher(), book.getPublicationDate(), book.getPages(), book.getCost(), book.getStatusBook().toString(), book.getDescription()}, new BookRowMapper());
-//    }
-
-
-
-//    public int[] saveGenres(List<GenresForBookDTO> genresForBookDTOList) {
-//        return jdbcTemplate.batchUpdate("INSERT INTO genresDB (idBook, name) VALUES (?, ?)",
-//                new BatchPreparedStatementSetter() {
-//
-//                    @Override
-//                    public void setValues(PreparedStatement ps, int i) throws SQLException {
-//                        ps.setLong(1, genresForBookDTOList.get(i).getIdBook());
-//                        ps.setString(2, genresForBookDTOList.get(i).getGenres().toString());
-//                    }
-//
-//                    @Override
-//                    public int getBatchSize() {
-//                        return genresForBookDTOList.size();
-//                    }
-//                });
-//    }
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setLong(1, genresForBookDTOList.get(i).getIdBook());
+                        ps.setLong(2, genresForBookDTOList.get(i).getIdGenres());
+                    }
+                    @Override
+                    public int getBatchSize() {
+                        return genresForBookDTOList.size();
+                    }
+                });
+    }
 
 
     public int[] saveReview(Book book) {
@@ -155,6 +127,13 @@ public class BookDAO {
                 "SELECT * FROM genresDB WHERE IDBOOK = ?",
                 new Object[] { id }, new GenresForBookRowMapper());
         return genresForBookDTOList;
+    }
+
+    public List <Genres> getAllGenres (){
+        List <Genres> genresList =  jdbcTemplate.query(
+                "SELECT * FROM genresDB",
+                new GenresRowMapper());
+        return genresList;
     }
 
 

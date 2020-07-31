@@ -28,12 +28,24 @@ public class Book {
 
     private List<Genres> genres;
 
-    @MapsId
     private List<Review> review;
 
     private double cost;
     private StatusBook statusBook;
     private String description;
+
+    public Book(String name, String author, Format format, String publisher, int publicationDate, int pages, List<Genres> genres, double cost, StatusBook statusBook, String description) {
+        this.name = name;
+        this.author = author;
+        this.format = format;
+        this.publisher = publisher;
+        this.publicationDate = publicationDate;
+        this.pages = pages;
+        this.genres = genres;
+        this.cost = cost;
+        this.statusBook = statusBook;
+        this.description = description;
+    }
 
     public Book(String name, String author, Format format, String publisher, int publicationDate, int pages, List<Genres> genres, List<Review> review, double cost, StatusBook statusBook, String description) {
         this.name = name;
@@ -47,5 +59,7 @@ public class Book {
         this.cost = cost;
         this.statusBook = statusBook;
         this.description = description;
+
+
     }
 }

@@ -5,11 +5,11 @@ import by.tms.bootstore.entity.books.Genres;
 public class GenresForBookDTO {
 
     private long idBook;
-    private Genres genres;
+    private long idGenres;
 
-    public GenresForBookDTO(long idBook, Genres genres) {
+    public GenresForBookDTO(long idBook, long idGenres) {
         this.idBook = idBook;
-        this.genres = genres;
+        this.idGenres = idGenres;
     }
 
     public GenresForBookDTO() {
@@ -23,11 +23,11 @@ public class GenresForBookDTO {
         this.idBook = idBook;
     }
 
-    public Genres getGenres() {
-        return genres;
+    public long getIdGenres() {
+        return idGenres;
     }
 
-    public void setGenres(Genres genres) {
-        this.genres = genres;
+    public void setIdGenres(long idGenres) {
+        this.idGenres = idGenres;
     }
 }
