@@ -4,6 +4,7 @@ import by.tms.bootstore.dao.BookDAO;
 import by.tms.bootstore.entity.books.Book;
 import by.tms.bootstore.entity.books.Genres;
 import by.tms.bootstore.entity.books.Review;
+import by.tms.bootstore.service.DTO.BookDTO;
 import by.tms.bootstore.service.DTO.BookReviewDTO;
 import by.tms.bootstore.service.DTO.GenresForBookDTO;
 import org.modelmapper.ModelMapper;
@@ -62,6 +63,15 @@ public class BookService {
         return bookReviewDTOArrayList;
     }
 
+    public Book convertToBook (BookDTO bookDTO, List<String> stringListId){
+        Book book = modelMapper.map(bookDTO, Book.class);
+        List<Genres> genresList = new ArrayList<>();
+        for (String stringId: stringListId) {
+            genresList.add(new Genres(Long.parseLong(stringId)));
+        }
+        book.setGenres(genresList);
+        return book;
+    }
 
 
     public void updateBook(Book book) {

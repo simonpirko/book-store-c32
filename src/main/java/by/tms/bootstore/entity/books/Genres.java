@@ -11,4 +11,8 @@ public class Genres {
 
     private long id;
     private String name;
+
+    public Genres(long id) {
+        this.id = id;
+    }
 }

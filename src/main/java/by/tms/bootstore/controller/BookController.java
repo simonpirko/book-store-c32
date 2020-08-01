@@ -3,14 +3,18 @@ package by.tms.bootstore.controller;
 
 import by.tms.bootstore.entity.books.*;
 import by.tms.bootstore.service.BookService;
+import by.tms.bootstore.service.DTO.BookDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
+import javax.management.loading.MLetContent;
+import javax.servlet.http.HttpServlet;
 import java.util.*;
 
 // страница просмотра книги по id
@@ -45,9 +49,12 @@ public class BookController {
     }
 
     @PostMapping ("/createBook")
-    public String  createBookP (Book book) {
+    public String  createBookP (BookDTO bookDTO, @RequestParam("genres") List <String> genres) {
+        Book book = bookService.convertToBook(bookDTO, genres);
+//        book.setGenres(genres);
 //        Date date= new Date();
-//        GregorianCalendar calendar = new GregorianCalendar();
+//        GregorianCalendar calendar = new Gregoria
+//        nCalendar();
 //        calendar.setTime(date);
 //        List<Genres> genres = new ArrayList<>();
 //        genres.add(new Genres(1, "Fantasy"));

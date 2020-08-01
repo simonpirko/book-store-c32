@@ -58,9 +58,10 @@
 
 <p>
 <li> Select Genres:
+    <label class="container" na
 <c:forEach items="${requestScope.allGenres}" var="list">
 <div class="form-check form-check-inline">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="genres" value="${list}">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="genres" value="${list.id}">
     <label class="form-check-label" for="inlineCheckbox1">${list.name}</label>
 </div>
 </c:forEach>

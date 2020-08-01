@@ -62,7 +62,7 @@ public class BookDAO {
 
 
     public int[] saveGenres (List<GenresForBookDTO> genresForBookDTOList) {
-        return jdbcTemplate.batchUpdate("INSERT INTO genresDB (idBook, name) VALUES (?, ?)",
+        return jdbcTemplate.batchUpdate("INSERT INTO bookGenresDB (idBook, idGenres) VALUES (?, ?)",
                 new BatchPreparedStatementSetter() {
 
                     @Override
