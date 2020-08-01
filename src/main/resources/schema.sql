@@ -53,3 +53,9 @@ create table bookReviewDB
     idBook long,
     idReview long
 );
+
+create table bookGenresDB
+(
+    idBook long,
+    idGenres long
+);
