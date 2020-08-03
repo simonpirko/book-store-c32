@@ -39,22 +39,31 @@ public class UserController {
 
 
     @GetMapping(path = "/reg")
-    public String reg(){
-        return "";
-    }
-
-    @PostMapping(path = "/reg")
     public String reg(@RequestParam String login,
                       @RequestParam String firstName,
                       @RequestParam String lastName,
-                      @RequestParam Calendar birthDate,
+                      @RequestParam String birthDate,
                       @RequestParam String password,
                       @RequestParam String email,
                       @RequestParam String telephone) {
-        User user = new User(login, firstName, lastName, birthDate, password, email, telephone);
+
+        User user = new User(login, firstName, lastName, birthDate, password, email, telephone, Role.USER);
         userService.createUser(user);
         return "";
     }
+
+//    @PostMapping(path = "/reg")
+//    public String reg(@RequestParam String login,
+//                      @RequestParam String firstName,
+//                      @RequestParam String lastName,
+//                      @RequestParam Calendar birthDate,
+//                      @RequestParam String password,
+//                      @RequestParam String email,
+//                      @RequestParam String telephone) {
+//        User user = new User(login, firstName, lastName, birthDate, password, email, telephone);
+//        userService.createUser(user);
+//        return "";
+//    }
 
     @GetMapping(path = "/auth")
     public String authG() {

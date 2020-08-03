@@ -1,15 +1,28 @@
 create table bookDB
 (
-    id long auto_increment,
-    name varchar,
-    author varchar,
-    format varchar,
-    publisher varchar,
+    id              long auto_increment,
+    name            varchar,
+    author          varchar,
+    format          varchar,
+    publisher       varchar,
     publicationDate int,
-    pages int,
-    cost double,
-    statusBook varchar,
-    description varchar
+    pages           int,
+    cost            double,
+    statusBook      varchar,
+    description     varchar
+);
+
+create table userDB
+(
+    id        long auto_increment,
+    login     varchar,
+    firstName varchar,
+    lastName  varchar,
+    birthDate varchar,
+    password  varchar,
+    email     varchar,
+    telephone varchar,
+    role      varchar
 );
 
 create unique index bookDB_id_uindex
@@ -21,7 +34,7 @@ alter table bookDB
 
 create table genresDB
 (
-    id long auto_increment,
+    id   long auto_increment,
     name varchar
 );
 
@@ -34,10 +47,10 @@ alter table genresDB
 
 create table reviewDB
 (
-    id long auto_increment,
-    body varchar,
-    estimation varchar,
-    idUser long,
+    id              long auto_increment,
+    body            varchar,
+    estimation      varchar,
+    idUser          long,
     publicationDate varchar
 );
 
@@ -50,12 +63,12 @@ alter table reviewDB
 
 create table bookReviewDB
 (
-    idBook long,
+    idBook   long,
     idReview long
 );
 
 create table bookGenresDB
 (
-    idBook long,
+    idBook   long,
     idGenres long
 );

@@ -4,33 +4,74 @@ import by.tms.bootstore.entity.user.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
 @Repository
 public class UserDAO {
 
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
     private JdbcTemplate template;
 
-    public UserDAO(JdbcTemplate template) {
+    public UserDAO(NamedParameterJdbcTemplate namedParameterJdbcTemplate, JdbcTemplate template) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
         this.template = template;
     }
 
-    public void createUser(User user) {
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource()
-                .addValue("LOGIN", user.getLogin())
-                .addValue("FIRSTNAME", user.getFirstName())
-                .addValue("LASTNAME", user.getLastName())
-                .addValue("PASSWORD", user.getPassword())
-                .addValue("EMAIL", user.getEmail())
-                .addValue("TELEPHONE", user.getTelephone());
-        template.update("insert into users (login,firstName, lastName, password, email, telephone)" +
-                " values (:login,:firstName, :lastName, :password, :email, :telephone)", sqlParameterSource);
+//    final String INSERT_SQL = "INSERT INTO bookDB (name, author, format, publisher, publicationDate, pages, cost, statusBook, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//        KeyHolder keyHolder = new GeneratedKeyHolder();
+//        jdbcTemplate.update(
+//                new PreparedStatementCreator() {
+//                    public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+//                        PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] {"id"});
+//                        ps.setString(1, book.getName());
+//                        ps.setString(2, book.getAuthor());
+//                        ps.setString(3, book.getFormat().toString());
+//                        ps.setString(4, book.getPublisher());
+//                        ps.setInt(5, book.getPublicationDate());
+//                        ps.setInt(6, book.getPages());
+//                        ps.setDouble(7, book.getCost());
+//                        ps.setString(8, book.getStatusBook().toString());
+//                        ps.setString(9, book.getDescription());
+//                        return ps;
+//                    }
+//                },
+//                keyHolder);
+//        return keyHolder;
+
+    public KeyHolder createUser(User user) {
+        final String INSERT_SQL = "INSERT INTO userDB (login, firstName, lastName, birthDate, password, email, telephone,role) VALUES (?,?,?,?,?,?,?,?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        template.update(
+                new PreparedStatementCreator() {
+                    public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                        PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{"id"});
+                        ps.setString(1, user.getLogin());
+                        ps.setString(2, user.getFirstName());
+                        ps.setString(3, user.getLastName());
+                        ps.setString(4, user.getBirthDate().toString());
+                        ps.setString(5, user.getPassword());
+                        ps.setString(6, user.getEmail());
+                        ps.setString(7, user.getTelephone());
+                        ps.setString(8, user.getRole().toString());
+                        return ps;
+                    }
+                },
+                keyHolder);
+        return keyHolder;
     }
 
     public void save() {

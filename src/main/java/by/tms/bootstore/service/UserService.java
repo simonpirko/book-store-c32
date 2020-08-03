@@ -7,6 +7,7 @@ import by.tms.bootstore.entity.user.Moderator;
 import by.tms.bootstore.entity.user.User;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +29,7 @@ public class UserService {
 
     @Transactional
     public void createUser(User user){
-        userDAO.createUser(user);
+        KeyHolder keyHolder = userDAO.createUser(user);
     }
 
 

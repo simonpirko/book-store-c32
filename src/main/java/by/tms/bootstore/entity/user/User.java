@@ -21,7 +21,7 @@ public class User {
 
     private String login;
 
-    public User(String login, String firstName, String lastName, Calendar birthDate, String password, String email, String telephone) {
+    public User(String login, String firstName, String lastName, String birthDate, String password, String email, String telephone, Role role) {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,11 +29,12 @@ public class User {
         this.password = password;
         this.email = email;
         this.telephone = telephone;
+        this.role = role;
     }
 
     private String firstName;
     private String lastName;
-    private Calendar birthDate;
+    private String birthDate;
     private String password;
     private String email;
     private List <WishList> wishList;
