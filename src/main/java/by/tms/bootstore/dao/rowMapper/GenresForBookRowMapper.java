@@ -1,4 +1,4 @@
-package by.tms.bootstore.dao;
+package by.tms.bootstore.dao.rowMapper;
 
 import by.tms.bootstore.entity.books.Genres;
 import by.tms.bootstore.service.DTO.GenresForBookDTO;
@@ -11,8 +11,8 @@ public class GenresForBookRowMapper implements RowMapper<GenresForBookDTO> {
     @Override
     public GenresForBookDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
         GenresForBookDTO genres = new GenresForBookDTO();
-//        genres.setIdBook(rs.getLong("IDBOOK"));
-//        genres.setGenres(Genres.valueOf(rs.getString("NAME")));
+        genres.setIdBook(rs.getLong("IDBOOK"));
+        genres.setIdGenres(rs.getLong("IDGENRES"));
         return genres;
     }
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -26,18 +27,69 @@
     </div>
 </nav>
 
+<h2>Create a new book</h2>
 
-<p> Prise in BYN <input type="text" name="name" placeholder="name"></p>
-<p> Prise in BYN <input type="text" name="author" placeholder="Prise"></p>
-<p> Prise in BYN <input type="format" name="prise" placeholder="Prise"></p>
-<p> Prise in BYN <input type="publisher" name="prise" placeholder="Prise"></p>
-<p> Prise in BYN <input type="publicationDate" name="prise" placeholder="Prise"></p>
-<p> Prise in BYN <input type="pages" name="prise" placeholder="Prise"></p>
-<p> Prise in BYN <input type="genres" name="prise" placeholder="Prise"></p>
-<p> Prise in BYN <input type="cost" name="prise" placeholder="Prise"></p>
-<p> Prise in BYN <input type="statusBook" name="prise" placeholder="Prise"></p>
-<p> Prise in BYN <input type="description" name="prise" placeholder="Prise"></p>
+<form action="/book/createBook" method="post">
+<p><li>Name book <input type="text" name="name" placeholder="Name"></li></p>
 
+<p><li> Author <input type="text" name="author" placeholder="Author"></li></p>
+
+<p>
+<li> Format <select name="format">
+    <c:forEach items="${requestScope.format}" var="list">
+        <option value="${list}"> ${list} </option>
+    </c:forEach>
+</select>
+</li>
+</p>
+
+<p><li> Publisher <input type="text" name="publisher" placeholder="Publisher"></li></p>
+
+<p>
+<li> Publication Date <select name="publicationDate">
+    <c:forEach items="${requestScope.listPublicationDate}" var="list">
+        <option value="${list}"> ${list} </option>
+    </c:forEach>
+</select>
+</li>
+</p>
+
+<p></li> Pages <input type="number" name="pages" placeholder="Pages"></p></p>
+
+<p>
+<li> Select Genres:
+    <label class="container" na
+<c:forEach items="${requestScope.allGenres}" var="list">
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="genres" value="${list.id}">
+    <label class="form-check-label" for="inlineCheckbox1">${list.name}</label>
+</div>
+</c:forEach>
+</li>
+</p>
+
+<dl class="row offset-sm-1">
+    <div class="form-group  w-50">
+        Описание
+        <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                  rows="3"></textarea>
+    </div>
+</dl>
+
+
+<p><li> Prise in BYN <input type="text" name="cost" placeholder="Prise"></li></p>
+
+<p>
+<li> Status <select name="statusBook">
+    <c:forEach items="${requestScope.status}" var="list">
+        <option value="${list}"> ${list} </option>
+    </c:forEach>
+</select>
+</li>
+</p>
+
+<button>Submit</button>
+</form>
 
 </body>
 </html>

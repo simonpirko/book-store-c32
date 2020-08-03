@@ -2,16 +2,19 @@ package by.tms.bootstore.controller;
 
 
 import by.tms.bootstore.entity.books.*;
-import by.tms.bootstore.entity.user.Role;
-import by.tms.bootstore.entity.user.User;
 import by.tms.bootstore.service.BookService;
+import by.tms.bootstore.service.DTO.BookDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+import javax.management.loading.MLetContent;
+import javax.servlet.http.HttpServlet;
 import java.util.*;
 
 // страница просмотра книги по id
@@ -37,24 +40,29 @@ public class BookController {
     }
 
     @GetMapping("/createBook")
-    public String createBookG() {
-        return "";
+    public String createBookG(Model model) {
+        model.addAttribute("format", Format.values());
+        model.addAttribute("listPublicationDate", bookService.listYear());
+        model.addAttribute("allGenres", bookService.allGenres());
+        model.addAttribute("status", StatusBook.values());
+        return "book/createBook";
     }
 
     @PostMapping ("/createBook")
-    public String  createBookP () {
-        Date date= new Date();
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-
-        List<Genres> genres = new ArrayList<>();
-        genres.add(new Genres(1, "Fantasy"));
-        genres.add(new Genres(7, "Thriller"));
-        List<Review> review = new ArrayList<>();
-        review.add(new Review(1, "testR1", Estimation.Neutral, 1, calendar));
-        review.add(new Review(2, "testR2", Estimation.Neutral, 2, calendar));
-        Book book = new Book ("test", "test", Format.Hardback, "test", 2000, 100, genres, review, 234, StatusBook.IN_STOCK, "test");
-
+    public String  createBookP (BookDTO bookDTO, @RequestParam("genres") List <String> genres) {
+        Book book = bookService.convertToBook(bookDTO, genres);
+//        book.setGenres(genres);
+//        Date date= new Date();
+//        GregorianCalendar calendar = new Gregoria
+//        nCalendar();
+//        calendar.setTime(date);
+//        List<Genres> genres = new ArrayList<>();
+//        genres.add(new Genres(1, "Fantasy"));
+//        genres.add(new Genres(7, "Thriller"));
+//        List<Review> review = new ArrayList<>();
+//        review.add(new Review(1, "testR1", Estimation.Neutral, 1, calendar));
+//        review.add(new Review(2, "testR2", Estimation.Neutral, 2, calendar));
+//        Book book = new Book ("test", "test", Format.Hardback, "test", 2000, 100, genres, review, 234, StatusBook.IN_STOCK, "test");
         bookService.createBook(book);
         return "";
     }

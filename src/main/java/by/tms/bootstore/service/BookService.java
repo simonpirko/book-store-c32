@@ -4,6 +4,7 @@ import by.tms.bootstore.dao.BookDAO;
 import by.tms.bootstore.entity.books.Book;
 import by.tms.bootstore.entity.books.Genres;
 import by.tms.bootstore.entity.books.Review;
+import by.tms.bootstore.service.DTO.BookDTO;
 import by.tms.bootstore.service.DTO.BookReviewDTO;
 import by.tms.bootstore.service.DTO.GenresForBookDTO;
 import org.modelmapper.ModelMapper;
@@ -33,6 +34,7 @@ public class BookService {
         KeyHolder keyHolder = bookDAO.saveBook(book);
         long idBook = Objects.requireNonNull(keyHolder.getKey()).longValue();
         book.setId(idBook);
+        bookDAO.saveGenres(convertToGenresDTO(book));
         bookDAO.saveReview(book);
         bookDAO.saveBookReviewDB(convertToBookReviewDTO(book));
     }
@@ -43,7 +45,7 @@ public class BookService {
              ) {
             GenresForBookDTO genresForBookDTO = new GenresForBookDTO();
             genresForBookDTO.setIdBook(book.getId());
-            genresForBookDTO.setGenres(genres);
+            genresForBookDTO.setIdGenres(genres.getId());
             genresForBookDTOList.add(genresForBookDTO);
         }
        return genresForBookDTOList;
@@ -61,6 +63,15 @@ public class BookService {
         return bookReviewDTOArrayList;
     }
 
+    public Book convertToBook (BookDTO bookDTO, List<String> stringListId){
+        Book book = modelMapper.map(bookDTO, Book.class);
+        List<Genres> genresList = new ArrayList<>();
+        for (String stringId: stringListId) {
+            genresList.add(new Genres(Long.parseLong(stringId)));
+        }
+        book.setGenres(genresList);
+        return book;
+    }
 
 
     public void updateBook(Book book) {
@@ -132,6 +143,18 @@ public class BookService {
     // сортировка по рекомендую/нерекомендую
     public List<Book> sortByReviews(String typeOfReview) {
         return new ArrayList<Book>();
+    }
+
+    public List<Integer> listYear() {
+        List<Integer> listYear = new ArrayList<>();
+        for (int i = 1960; i < 2021; i++) {
+            listYear.add(i);
+        }
+        return listYear;
+    }
+
+    public List<Genres> allGenres(){
+        return bookDAO.getAllGenres();
     }
 
 }

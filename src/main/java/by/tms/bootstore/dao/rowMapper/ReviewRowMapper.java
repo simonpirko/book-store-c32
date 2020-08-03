@@ -1,4 +1,4 @@
-package by.tms.bootstore.dao;
+package by.tms.bootstore.dao.rowMapper;
 
 import by.tms.bootstore.entity.books.Estimation;
 import by.tms.bootstore.entity.books.Review;
