@@ -1,6 +1,7 @@
 package by.tms.bootstore.controller;
 
 
+import by.tms.bootstore.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +12,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path = "/administrator")
 public class AdminController {
 
-      @GetMapping(path = "/profile")
-    public String  profileG () {
+    private UserService userService;
+
+    public AdminController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping(path = "/getAllUsers")
+    public String getAllUsers() {
+        userService.getUserList();
+        return "";
+    }
+
+    @GetMapping(path = "/getUser")
+    public String getUser(long id){
+        userService.getUserById(id);
+        return "";
+    }
+
+    @GetMapping(path = "/profile")
+    public String profileG() {
         return "";
     }
 
     @PostMapping(path = "/profile")
-    public String  profileP () {
+    public String profileP() {
         return "";
     }
 
@@ -27,7 +46,7 @@ public class AdminController {
         return "";
     }
 
-    @PostMapping (path = "/edit")
+    @PostMapping(path = "/edit")
     public String editBookP() {
         return "";
     }
@@ -37,12 +56,11 @@ public class AdminController {
         return "";
     }
 
-    @DeleteMapping(path = "/delete")
-    public String deleteD() {
+    @DeleteMapping(path = "/deleteUser")
+    public String deleteUser(String email) {
+        userService.deleteUserByEmail(email);
         return "";
     }
-
-
 
 
 }

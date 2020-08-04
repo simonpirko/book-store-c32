@@ -1,5 +1,6 @@
 package by.tms.bootstore.dao;
 
+import by.tms.bootstore.dao.rowMapper.UserRowMapper;
 import by.tms.bootstore.entity.user.User;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,23 @@ public class UserDAO {
                 },
                 keyHolder);
         return keyHolder;
+    }
+
+    public User getUser(long id) {
+        User user = template.queryForObject("select * from userDB where ID = ?",
+                new Object[]{id},
+                new UserRowMapper());
+        return user;
+    }
+
+    public List<User> getAllUsers() {
+        List<User> userList = template.query("select * from userDB",
+                new UserRowMapper());
+        return userList;
+    }
+
+    public void deleteUserByEmail(String email) {
+        template.update("delete from userDB where  email := email");
     }
 
     public void save() {
