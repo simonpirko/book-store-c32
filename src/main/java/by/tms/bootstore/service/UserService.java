@@ -28,45 +28,48 @@ public class UserService {
     }
 
     @Transactional
-    public void createUser(User user){
+    public void createUser(User user) {
         KeyHolder keyHolder = userDAO.createUser(user);
     }
 
 
-    public void updateUser(long id){
+    public void updateUser(long id) {
     }
 
-    public void deleteUser(long id){
+    public void deleteUser(long id) {
     }
 
-    public User getUserById(long id){
-        return new User();
+    public void deleteUserByEmail(String email){
+        userDAO.deleteUserByEmail(email);
     }
 
-    public List<User> getUserList(){
-        return new ArrayList<User>();
+    public User getUserById(long id) {
+        return userDAO.getUser(id);
     }
 
-    public void logout(){
+    public List<User> getUserList() {
+        return userDAO.getAllUsers();
     }
 
-    public void createModerator(){
+    public void logout() {
     }
 
-    public void updateModerator(){
+    public void createModerator() {
     }
 
-    public void deleteModerator(){
+    public void updateModerator() {
     }
 
-    public Moderator getModeratorById(long id){
+    public void deleteModerator() {
+    }
+
+    public Moderator getModeratorById(long id) {
         return new Moderator();
     }
 
-    public List<Moderator> getModeratorList(){
+    public List<Moderator> getModeratorList() {
         return new ArrayList<Moderator>();
     }
-
 
 
 }
