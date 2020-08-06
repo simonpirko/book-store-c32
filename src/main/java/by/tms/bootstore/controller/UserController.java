@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.DocFlavor;
+import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,6 +40,11 @@ public class UserController {
 
 
     @GetMapping(path = "/reg")
+    public String reg() {
+        return "";
+    }
+
+    @PostMapping(path = "/reg")
     public String reg(@RequestParam String login,
                       @RequestParam String firstName,
                       @RequestParam String lastName,
@@ -52,27 +58,20 @@ public class UserController {
         return "";
     }
 
-//    @PostMapping(path = "/reg")
-//    public String reg(@RequestParam String login,
-//                      @RequestParam String firstName,
-//                      @RequestParam String lastName,
-//                      @RequestParam Calendar birthDate,
-//                      @RequestParam String password,
-//                      @RequestParam String email,
-//                      @RequestParam String telephone) {
-//        User user = new User(login, firstName, lastName, birthDate, password, email, telephone);
-//        userService.createUser(user);
-//        return "";
-//    }
-
     @GetMapping(path = "/auth")
     public String authG() {
-        return "";
+        return "user/auth";
     }
 
     @PostMapping(path = "/auth")
-    public String authP() {
-        return "";
+    public String authP(@RequestParam String login,
+                        @RequestParam String password,
+                        HttpSession httpSession) {
+        User user = userService.auth(login, password);
+        if (user != null) {
+            httpSession.setAttribute("auth", true);
+            return "main/index";
+        } else return "user/auth";
     }
 
     @GetMapping(path = "/profile")
