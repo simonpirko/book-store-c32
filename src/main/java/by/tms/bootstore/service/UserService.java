@@ -27,6 +27,10 @@ public class UserService {
         this.modelMapper = modelMapper;
     }
 
+    public User auth(String login, String password){
+        return userDAO.auth(login, password);
+    }
+
     @Transactional
     public void createUser(User user) {
         KeyHolder keyHolder = userDAO.createUser(user);

@@ -1,5 +1,6 @@
 package by.tms.bootstore.dao;
 
+import by.tms.bootstore.dao.rowMapper.BookRowMapper;
 import by.tms.bootstore.dao.rowMapper.UserRowMapper;
 import by.tms.bootstore.entity.user.User;
 import lombok.Data;
@@ -75,9 +76,15 @@ public class UserDAO {
         return keyHolder;
     }
 
+
+    public User auth(String login, String password) {
+        return template.queryForObject("select * from userDB where login :=login and password :=password",
+                new UserRowMapper());
+    }
+
     public User getUser(long id) {
-        User user = template.queryForObject("select * from userDB where ID = ?",
-                new Object[]{id},
+
+        User user = template.queryForObject("select * from userDB where ID := id",
                 new UserRowMapper());
         return user;
     }
